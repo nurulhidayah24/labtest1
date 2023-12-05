@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>bmi.dart</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #a9b7c6;}
+.s1 { color: #6a8759;}
+.s2 { color: #cc7832;}
+.s3 { color: #808080;}
+.s4 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+bmi.dart</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">'../Controller/sqlite_db.dart'</span><span class="s2">;</span>
+
+<span class="s2">class </span><span class="s0">BMIApp {</span>
+  <span class="s0">static </span><span class="s2">const </span><span class="s0">String SQLiteTable = </span><span class="s1">&quot;bmi&quot;</span><span class="s2">;</span>
+  <span class="s0">int? id</span><span class="s2">;</span>
+  <span class="s0">String username</span><span class="s2">;</span>
+  <span class="s0">double weight</span><span class="s2">;</span>
+  <span class="s0">double height</span><span class="s2">;</span>
+  <span class="s0">String gender</span><span class="s2">;</span>
+  <span class="s0">String status</span><span class="s2">;</span>
+  <span class="s0">BMIApp (</span><span class="s2">this</span><span class="s0">.username</span><span class="s2">, this</span><span class="s0">.weight</span><span class="s2">, this</span><span class="s0">.height</span><span class="s2">, this</span><span class="s0">.gender</span><span class="s2">, this</span><span class="s0">.status)</span><span class="s2">;</span>
+
+  <span class="s0">BMIApp.fromJson(Map&lt;String</span><span class="s2">, </span><span class="s0">dynamic&gt; json)</span>
+      <span class="s0">: username = json[</span><span class="s1">'username'</span><span class="s0">] as String</span><span class="s2">,</span>
+        <span class="s0">weight = double.parse(json[</span><span class="s1">'weight'</span><span class="s0">] as dynamic)</span><span class="s2">,</span>
+        <span class="s0">height = double.parse(json[</span><span class="s1">'height'</span><span class="s0">] as dynamic)</span><span class="s2">,</span>
+        <span class="s0">gender = json[</span><span class="s1">'gender'</span><span class="s0">] as String</span><span class="s2">,</span>
+        <span class="s0">status = json[</span><span class="s1">'bmi_status'</span><span class="s0">] as String</span><span class="s2">,</span>
+        <span class="s0">id = json[</span><span class="s1">'id'</span><span class="s0">] as int?</span><span class="s2">;</span>
+
+  <span class="s0">Map&lt;String</span><span class="s2">, </span><span class="s0">dynamic&gt; toJson() =&gt;</span>
+      <span class="s0">{</span><span class="s1">'username'</span><span class="s0">: username</span><span class="s2">, </span><span class="s1">'weight'</span><span class="s0">: weight</span><span class="s2">, </span><span class="s1">'height'</span><span class="s0">: height</span><span class="s2">, </span><span class="s1">'gender'</span><span class="s0">: gender</span><span class="s2">, </span><span class="s1">'status'</span><span class="s0">: status}</span><span class="s2">;</span>
+
+  <span class="s3">//add save</span>
+  <span class="s0">Future&lt;bool&gt; save() async {</span>
+    <span class="s3">// Save to local SQLite</span>
+    <span class="s0">int result = await SQLiteDB().insert(SQLiteTable</span><span class="s2">, </span><span class="s0">toJson())</span><span class="s2">;</span>
+    <span class="s2">if </span><span class="s0">(result != </span><span class="s4">0</span><span class="s0">) {</span>
+      <span class="s2">return true;</span>
+    <span class="s0">} </span><span class="s2">else </span><span class="s0">{</span>
+      <span class="s2">return false;</span>
+    <span class="s0">}</span>
+  <span class="s0">}</span>
+
+<span class="s0">}</span></pre>
+</body>
+</html>
